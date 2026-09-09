@@ -34,4 +34,9 @@ public class DoctorController {
     public ResponseEntity<List<AppointmentResponse>> getSchedule(@PathVariable Long id){
         return ResponseEntity.ok(appointmentService.getDoctorSchedule(id));
     }
+
+    @GetMapping
+    public ResponseEntity<List<DoctorResponse>> getAll() {
+        return ResponseEntity.ok(doctorService.getAll());
+    }
 }

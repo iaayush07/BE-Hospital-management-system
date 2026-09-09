@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/patients")
@@ -23,5 +25,10 @@ public class PatientController {
     @GetMapping("/{id}")
     public ResponseEntity<PatientResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(patientService.getById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PatientResponse>> getAll() {
+        return ResponseEntity.ok(patientService.getAll());
     }
 }

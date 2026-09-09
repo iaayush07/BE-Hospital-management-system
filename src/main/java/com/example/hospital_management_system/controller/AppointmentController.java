@@ -32,4 +32,9 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.complete(id));
     }
 
+    @GetMapping
+    public ResponseEntity<List<AppointmentResponse>> getAll() {
+        return ResponseEntity.ok(appointmentService.getAll());
+    }
+
 }

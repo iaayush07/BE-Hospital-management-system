@@ -8,6 +8,8 @@ import com.example.hospital_management_system.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PatientService {
@@ -26,6 +28,10 @@ public class PatientService {
     public PatientResponse getById(Long id){
         Patient patient = patientRepository.findById(id).orElseThrow(()-> new NotFoundException("Patient not found with id: " + id));
         return toResponse(patient);
+    }
+
+    public List<PatientResponse> getAll() {
+        return patientRepository.findAll().stream().map(this::toResponse).toList();
     }
 
     private PatientResponse toResponse(Patient patient){

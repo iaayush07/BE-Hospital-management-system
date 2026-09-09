@@ -61,6 +61,10 @@ public class AppointmentService {
         return appointmentRepository.findByDoctorIdAndStatusNot(doctorId, AppointmentStatus.CANCELLED).stream().map(this::toResponse).toList();
     }
 
+    public List<AppointmentResponse> getAll() {
+        return appointmentRepository.findAll().stream().map(this::toResponse).toList();
+    }
+
     private AppointmentResponse toResponse(Appointment appointment){
         return AppointmentResponse.builder()
                 .id(appointment.getId())
