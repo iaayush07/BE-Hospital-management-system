@@ -1,8 +1,8 @@
-package com.example.hospital_management_system.controller;
+package com.onerivet.controller;
 
-import com.example.hospital_management_system.dto.AppointmentRequest;
-import com.example.hospital_management_system.dto.AppointmentResponse;
-import com.example.hospital_management_system.service.AppointmentService;
+import com.onerivet.dto.AppointmentRequest;
+import com.onerivet.dto.AppointmentResponse;
+import com.onerivet.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,8 +33,11 @@ public class AppointmentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AppointmentResponse>> getAll() {
-        return ResponseEntity.ok(appointmentService.getAll());
+    public ResponseEntity<List<AppointmentResponse>> getAll(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String status
+    ) {
+        return ResponseEntity.ok(appointmentService.getAll(name, status));
     }
 
 }

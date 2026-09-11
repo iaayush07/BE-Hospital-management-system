@@ -1,17 +1,19 @@
-package com.example.hospital_management_system.service;
+package com.onerivet.service;
 
-import com.example.hospital_management_system.dto.AppointmentRequest;
-import com.example.hospital_management_system.dto.AppointmentResponse;
-import com.example.hospital_management_system.exception.NotFoundException;
-import com.example.hospital_management_system.exception.SlotUnavailableException;
-import com.example.hospital_management_system.model.Appointment;
-import com.example.hospital_management_system.model.AppointmentStatus;
-import com.example.hospital_management_system.model.Doctor;
-import com.example.hospital_management_system.model.Patient;
-import com.example.hospital_management_system.repository.AppointmentRepository;
-import com.example.hospital_management_system.repository.DoctorRepository;
-import com.example.hospital_management_system.repository.PatientRepository;
+import com.onerivet.dto.AppointmentRequest;
+import com.onerivet.dto.AppointmentResponse;
+import com.onerivet.exception.NotFoundException;
+import com.onerivet.exception.SlotUnavailableException;
+import com.onerivet.model.Appointment;
+import com.onerivet.model.AppointmentStatus;
+import com.onerivet.model.Doctor;
+import com.onerivet.model.Patient;
+import com.onerivet.repository.AppointmentRepository;
+import com.onerivet.repository.DoctorRepository;
+import com.onerivet.repository.PatientRepository;
+import com.onerivet.specification.AppointmentSpec;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,8 +63,11 @@ public class AppointmentService {
         return appointmentRepository.findByDoctorIdAndStatusNot(doctorId, AppointmentStatus.CANCELLED).stream().map(this::toResponse).toList();
     }
 
-    public List<AppointmentResponse> getAll() {
-        return appointmentRepository.findAll().stream().map(this::toResponse).toList();
+    public List<AppointmentResponse> getAll(String name, String status) {
+        Specification<Appointment> spec = Specification
+                .where(AppointmentSpec.hasName(name))
+                .and(AppointmentSpec.hasStatus(status));
+        return appointmentRepository.findAll(spec).stream().map(this::toResponse).toList();
     }
 
     private AppointmentResponse toResponse(Appointment appointment){

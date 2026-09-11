@@ -1,11 +1,13 @@
-package com.example.hospital_management_system.service;
+package com.onerivet.service;
 
-import com.example.hospital_management_system.dto.PatientRequest;
-import com.example.hospital_management_system.dto.PatientResponse;
-import com.example.hospital_management_system.exception.NotFoundException;
-import com.example.hospital_management_system.model.Patient;
-import com.example.hospital_management_system.repository.PatientRepository;
+import com.onerivet.dto.PatientRequest;
+import com.onerivet.dto.PatientResponse;
+import com.onerivet.exception.NotFoundException;
+import com.onerivet.model.Patient;
+import com.onerivet.repository.PatientRepository;
+import com.onerivet.specification.PatientSpec;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +32,9 @@ public class PatientService {
         return toResponse(patient);
     }
 
-    public List<PatientResponse> getAll() {
-        return patientRepository.findAll().stream().map(this::toResponse).toList();
+    public List<PatientResponse> getAll(String name, String phone, String gender) {
+        Specification<Patient> spec = Specification.where(PatientSpec.hasName(name)).and(PatientSpec.hasPhone(phone).and(PatientSpec.hasGender(gender)));
+        return patientRepository.findAll(spec).stream().map(this::toResponse).toList();
     }
 
     private PatientResponse toResponse(Patient patient){

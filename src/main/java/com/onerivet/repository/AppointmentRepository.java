@@ -1,13 +1,14 @@
-package com.example.hospital_management_system.repository;
+package com.onerivet.repository;
 
-import com.example.hospital_management_system.model.Appointment;
-import com.example.hospital_management_system.model.AppointmentStatus;
+import com.onerivet.model.Appointment;
+import com.onerivet.model.AppointmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
+public interface AppointmentRepository extends JpaRepository<Appointment,Long>, JpaSpecificationExecutor<Appointment> {
     boolean existsByDoctorIdAndSlotAndStatusNot(
             Long doctorId,
             LocalDateTime slot,

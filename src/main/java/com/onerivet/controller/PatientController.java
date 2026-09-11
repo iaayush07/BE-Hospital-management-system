@@ -1,8 +1,8 @@
-package com.example.hospital_management_system.controller;
+package com.onerivet.controller;
 
-import com.example.hospital_management_system.dto.PatientRequest;
-import com.example.hospital_management_system.dto.PatientResponse;
-import com.example.hospital_management_system.service.PatientService;
+import com.onerivet.dto.PatientRequest;
+import com.onerivet.dto.PatientResponse;
+import com.onerivet.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class PatientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PatientResponse>> getAll() {
-        return ResponseEntity.ok(patientService.getAll());
+    public ResponseEntity<List<PatientResponse>> getAll(@RequestParam(required = false) String name,@RequestParam(required = false) String phone,@RequestParam(required = false) String gender) {
+        return ResponseEntity.ok(patientService.getAll(name, phone, gender));
     }
 }
