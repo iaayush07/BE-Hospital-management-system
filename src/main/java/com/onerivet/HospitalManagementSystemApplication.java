@@ -1,4 +1,4 @@
-package com.example.hospital_management_system;
+package com.onerivet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
