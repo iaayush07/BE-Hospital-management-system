@@ -1,4 +1,4 @@
-package com.example.hospital_management_system.exception;
+package com.onerivet.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.hospital_management_system.config;
+package com.onerivet.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.example.hospital_management_system.dto;
+package com.onerivet.dto;
 
-import com.example.hospital_management_system.model.AppointmentStatus;
+import com.onerivet.model.AppointmentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;

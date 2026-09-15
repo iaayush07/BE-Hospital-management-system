@@ -1,6 +1,6 @@
-package com.example.hospital_management_system.dto;
+package com.onerivet.dto;
 
-import com.example.hospital_management_system.model.Specialization;
+import com.onerivet.model.Specialization;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

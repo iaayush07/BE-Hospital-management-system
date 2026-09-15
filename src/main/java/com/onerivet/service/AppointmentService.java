@@ -2,6 +2,7 @@ package com.onerivet.service;
 
 import com.onerivet.dto.AppointmentRequest;
 import com.onerivet.dto.AppointmentResponse;
+import com.onerivet.dto.PageResponse;
 import com.onerivet.exception.NotFoundException;
 import com.onerivet.exception.SlotUnavailableException;
 import com.onerivet.model.Appointment;
@@ -13,9 +14,11 @@ import com.onerivet.repository.DoctorRepository;
 import com.onerivet.repository.PatientRepository;
 import com.onerivet.specification.AppointmentSpec;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Service
@@ -63,11 +66,14 @@ public class AppointmentService {
         return appointmentRepository.findByDoctorIdAndStatusNot(doctorId, AppointmentStatus.CANCELLED).stream().map(this::toResponse).toList();
     }
 
-    public List<AppointmentResponse> getAll(String name, String status) {
+    public PageResponse<AppointmentResponse> getAll(String name, String status, Pageable pageable) {
         Specification<Appointment> spec = Specification
                 .where(AppointmentSpec.hasName(name))
                 .and(AppointmentSpec.hasStatus(status));
-        return appointmentRepository.findAll(spec).stream().map(this::toResponse).toList();
+        Page<AppointmentResponse> page = appointmentRepository
+                .findAll(spec, pageable)
+                .map(this::toResponse);
+        return PageResponse.from(page);
     }
 
     private AppointmentResponse toResponse(Appointment appointment){

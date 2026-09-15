@@ -1,4 +1,4 @@
-package com.example.hospital_management_system.dto;
+package com.onerivet.dto;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;

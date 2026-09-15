@@ -1,4 +1,4 @@
-package com.example.hospital_management_system.exception;
+package com.onerivet.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message){

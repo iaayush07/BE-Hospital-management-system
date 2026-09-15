@@ -1,4 +1,4 @@
-package com.example.hospital_management_system.model;
+package com.onerivet.model;
 
 public enum AppointmentStatus {
     SCHEDULED,
